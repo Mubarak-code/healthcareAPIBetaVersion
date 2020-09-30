@@ -1,18 +1,19 @@
 package com.example.demo.service.impl;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Doctor;
-import com.example.demo.model.Employee;
 import com.example.demo.model.Medicine;
 import com.example.demo.model.Nurse;
 import com.example.demo.model.Patient;
 import com.example.demo.repository.DoctorRepository;
-import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.MedicineRepository;
 import com.example.demo.repository.PatientRepository;
 import com.example.demo.service.IDoctorService;
@@ -33,6 +34,7 @@ public class DoctorService implements IDoctorService {
 	
 	@Autowired
 	private NurseService nurseService;
+
 	/*
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -109,9 +111,14 @@ public class DoctorService implements IDoctorService {
 	}
 
 	@Override
-	public List<Doctor> getallDoctors() {
-		
-		return doctorRepository.findAll();
+	public Page<Doctor> getallDoctors(int page,int pageSize ,String sortField, String sortDirection) {
+
+		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortField).ascending():Sort.by(sortField).descending();
+
+
+		Pageable pageable = PageRequest.of(page-1,pageSize,sort);
+
+		 return doctorRepository.findAll(pageable);
 	}
 
 	@Override
@@ -122,4 +129,26 @@ public class DoctorService implements IDoctorService {
 		return "Operation succesful";
 	}
 
+
+	public Page<Doctor> getDoctorsStartingWith(int pageNo,String word){
+		int pageSize = 2;
+		List <Doctor> doctorListfromRepo = doctorRepository.findByDoctorNameStartingWith(word);
+
+		if (!doctorListfromRepo.isEmpty()){
+			System.out.println(doctorListfromRepo.size());
+			doctorListfromRepo.sort(Comparator.comparing(Doctor::getDoctorName));
+			Pageable page = PageRequest.of(pageNo-1,pageSize);
+			int start = (int) page.getOffset();
+			int end = (start + page.getPageSize()) > doctorListfromRepo.size() ? doctorListfromRepo .size() : (start + page.getPageSize());
+
+			//List<DepartmentAdminPageUserDTO> userSubList = userList.subList((pageable.getPage()-1)*pageable.getSize(), (pageable.getPage()*pageable.getSize())-1);
+
+			Page<Doctor> pageK = new PageImpl<>(doctorListfromRepo .subList(start, end), page, doctorListfromRepo.size());
+
+			return pageK;
+
+		}
+		return null;
+
+	}
 }
