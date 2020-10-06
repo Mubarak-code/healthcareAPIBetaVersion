@@ -27,6 +27,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	//post method
 	@PostMapping("/createnewemployee")
 	public ResponseEntity<String> createNewEmployee(@Valid @RequestBody Employee employee){
 		//return  ResponseEntity.ok("Input valid and saved");
@@ -40,7 +41,7 @@ public class EmployeeController {
 	
 	
 	
-	
+	//delete
 	@DeleteMapping("/deleteemployee/{id}")
 	public ResponseEntity<?> deleteEmployee(@PathVariable ("id") Long id){
 		return new ResponseEntity<String>(employeeService.deleteEmployee(id), HttpStatus.OK );
