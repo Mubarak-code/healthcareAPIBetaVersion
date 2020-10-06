@@ -29,8 +29,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c13a40c-4250-47c7-b795-71ac25f7889f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/healthcareAPIBetaVersion.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +64,17 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HealthcareApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="HealthcareAPI" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.HealthcareApiApplication" />
@@ -80,6 +94,7 @@
       <workItem from="1601363129679" duration="4705000" />
       <workItem from="1601961628479" duration="317000" />
       <workItem from="1601962108581" duration="156000" />
+      <workItem from="1601962269778" duration="272000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;ignore .idea files&quot;&#10;&#10;This reverts commit 754cc316">
       <created>1601960739508</created>
