@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,13 +49,20 @@ public class DoctorController extends Employee {
 	}
 	
 	
-	@GetMapping("/doctors")
-	public ResponseEntity<List<Doctor>> getdoctorList(){
-		List<Doctor> doctors = doctorService.getallDoctors();
-		return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
+	@GetMapping("/doctors/{pageNo}")
+	public ResponseEntity<List<Doctor>> getdoctorList(@PathVariable (value ="pageNo") int pageNo, @RequestParam ("name") String name, @RequestParam ("sortDirection") String sortDirection){
+		int pageSize = 2;
+		Page<Doctor> page = doctorService.getallDoctors(pageNo, pageSize, name, sortDirection);
+		List<Doctor> doctors = page.getContent();
+		return new ResponseEntity<>(doctors, HttpStatus.OK);
 	}
-	
-	
+
+
+
+	@GetMapping("/getdoctorstartwith/{pageNo}/{word}")
+	public ResponseEntity<List<Doctor>> getAllDoctorStartWith(@PathVariable ("pageNo") int pageNo,@PathVariable ("word") String word){
+		return new ResponseEntity<List<Doctor>>(doctorService.getDoctorsStartingWith(pageNo,word).getContent(), HttpStatus.OK);
+	}
 	
 	@GetMapping("/getdoctorpatients/{id}")
 	public ResponseEntity<List<Patient>> getDoctorPatients(@PathVariable ("id") Long doctorId){
