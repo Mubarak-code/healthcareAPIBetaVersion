@@ -16,7 +16,7 @@ public class GlobalErrorHandler {
 	
 	@ExceptionHandler(ConstraintViolationException.class)
 	@ResponseBody
-	public ResponseError handleCustomException(ConstraintViolationException ex) {
+	public ResponseError handleCustomeException(ConstraintViolationException ex) {
 		ResponseError responseError = new ResponseError();
 		List <String> errorMessages = new ArrayList<>();
 		for (ConstraintViolation constraintViolation : ex.getConstraintViolations()) {

@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,10 +48,10 @@ public class DoctorController extends Employee {
 	}
 	
 	
-	@GetMapping("/doctors/{page}")
-	public ResponseEntity<List<Doctor>> getdoctorList(@PathVariable ("page") int page, @RequestParam ("name") String name, @RequestParam ("sortDirection") String direction){
-		Page<Doctor> doctors = (Page<Doctor>) doctorService.getallDoctors(page,name,direction).getContent();
-		return new ResponseEntity<List<Doctor>>((List<Doctor>) doctors, HttpStatus.OK);
+	@GetMapping("/doctors")
+	public ResponseEntity<List<Doctor>> getdoctorList(){
+		List<Doctor> doctors = doctorService.getallDoctors();
+		return new ResponseEntity<List<Doctor>>(doctors, HttpStatus.OK);
 	}
 	
 	
