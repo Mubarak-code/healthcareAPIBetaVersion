@@ -111,6 +111,7 @@ public class DoctorService implements IDoctorService {
 	}
 
 	@Override
+	//with pagination
 	public Page<Doctor> getallDoctors(int page,int pageSize ,String sortField, String sortDirection) {
 
 		Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())?Sort.by(sortField).ascending():Sort.by(sortField).descending();
